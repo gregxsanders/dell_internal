@@ -1,19 +1,28 @@
 connection: "dell"
 
 include: "*.view.lkml"         # include all views in this project
-#include: "*.dashboard.lookml"  # include all dashboards in this project
 
-# # Select the views that should be a part of this model,
-# # and define the joins that connect them together.
-#
-# explore: order_items {
-#   join: orders {
-#     relationship: many_to_one
-#     sql_on: ${orders.id} = ${order_items.order_id} ;;
-#   }
-#
-#   join: users {
-#     relationship: many_to_one
-#     sql_on: ${users.id} = ${orders.user_id} ;;
-#   }
-# }
+explore: orderlines {
+  group_label: "eComm"
+  label: "eComm Orders"
+  join: orders {
+    relationship: many_to_one
+    sql_on: ${orderid} = ${orders.orderid} ;;
+  }
+  join: customers {
+    relationship: many_to_one
+    sql_on: ${customers.customerid} = ${orders.customerid} ;;
+  }
+  join: products {
+    relationship: many_to_one
+    sql_on: ${products.prod_id} = ${orderlines.prod_id} ;;
+  }
+  join: categories {
+    relationship: many_to_one
+    sql_on: ${categories.category} = ${products.category} ;;
+  }
+  join: inventory {
+    relationship: many_to_one
+    sql_on: ${inventory.prod_id} = ${orderlines.prod_id} ;;
+  }
+}
