@@ -42,40 +42,32 @@ view: products {
     drill_fields: []
   }
 
-parameter: price_metric_picker {
-  description: "Use with price metric measure"
-  type: unquoted
-  allowed_value: {
-    label: "Total Sale Price"
-    value: "SUM"
+  parameter: price_metric_picker {
+    description: "Use with price metric measure"
+    type: unquoted
+    allowed_value: {
+      label: "Total Sale Price"
+      value: "SUM"
+    }
+    allowed_value: {
+      label: "Average Price"
+      value: "AVG"
+    }
+    allowed_value: {
+      label: "Max Price"
+      value: "MAX"
+    }
+    allowed_value: {
+      label: "Min Price"
+      value: "MIN"
+    }
   }
-  allowed_value: {
-    label: "Average Price"
-    value: "AVG"
-  }
-  allowed_value: {
-    label: "Max Price"
-    value: "MAX"
-  }
-  allowed_value: {
-    label: "Min Price"
-    value: "MIN"
-  }
-}
 
-measure: price_metric{
-  description: "Use with the price metric picker filter-only field"
-  type: number
-  label_from_parameter: price_metric_picker
-  sql: {% parameter price_metric_picker %}(${price}) ;;
-  value_format_name: usd
-}
-
-#   measure: sale_price_metric {
-#     description: "Use with the Sale Price Metric Picker filter-only field"
-#     type: number
-#     label_from_parameter: sale_price_metric_picker
-#     sql: {% parameter sale_price_metric_picker %}(${sale_price}) ;;
-#     value_format_name: usd
-#   }
+  measure: price_metric{
+    description: "Use with the price metric picker filter-only field"
+    type: number
+    label_from_parameter: price_metric_picker
+    sql: {% parameter price_metric_picker %}(${price}) ;;
+    value_format_name: usd
+  }
 }

@@ -25,4 +25,9 @@ explore: orderlines {
     relationship: many_to_one
     sql_on: ${inventory.prod_id} = ${orderlines.prod_id} ;;
   }
+  join: cust_order_facts {
+    view_label: "Customers"
+    relationship: many_to_one
+    sql_on: ${customers.customerid} = ${cust_order_facts.cust_id} ;;
+  }
 }
